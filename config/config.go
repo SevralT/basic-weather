@@ -15,10 +15,10 @@ type Config struct {
 
 func LoadOrCreateConfig(filename string) (*Config, error) {
 	_, err := os.Stat(filename)
-	if os.IsNotExist(err) {
+	if os.IsNotExist(err) || len(os.Args) > 1 && os.Args[1] == "edit" {
 		config := &Config{}
 
-		fmt.Println("Первоначальная настройка:")
+		fmt.Println("Настройка город (На английском)")
 		fmt.Print("Введите название города: ")
 		_, err = fmt.Scan(&config.City)
 		if err != nil {

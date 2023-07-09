@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"time"
+  "os"
 
 	"github.com/SevralT/basic-weather/config"
 	"github.com/SevralT/basic-weather/location"
@@ -16,7 +17,7 @@ func main() {
 		log.Fatal("Ошибка при загрузке/создании файла конфигурации:", err)
 	}
 
-	if configData.Latitude == 0 || configData.Longitude == 0 {
+	if configData.Latitude == 0 || configData.Longitude == 0 || len(os.Args) > 1 && os.Args[1] == "edit" {
 		locationData, err := location.GetLocationFromAPI(configData.City)
 		if err != nil {
 			log.Fatal("Ошибка при получении координат города:", err)
